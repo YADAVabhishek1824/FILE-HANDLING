@@ -86,3 +86,5 @@ Conclusion
 File handling is a crucial concept that allows data to be stored and retrieved effectively. Whether you’re making a simple text editor or a complex data management system, file handling enables your programs to be more useful and dynamic. Mastering file handling lays a strong foundation for learning databases, data structures, and software development in general.
 
 #OUTPUT
+
+![Image](https://github.com/user-attachments/assets/e9e351d3-64b8-44f0-96d3-f8c604c40ead)
