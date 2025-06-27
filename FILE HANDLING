@@ -1,111 +1,44 @@
 #include <stdio.h>
-#include <stdlib.h>
-
-void createFile();
-void writeFile();
-void readFile();
-void appendFile();
 
 int main() {
-    int choice;
-    
-    while (1) {
-        printf("\nFile Handling Menu\n");
-        printf("1. Create new file\n");
-        printf("2. Write to file\n");
-        printf("3. Read from file\n");
-        printf("4. Append to file\n");
-        printf("5. Exit\n");
-        printf("Enter choice: ");
-        scanf("%d", &choice);
-        
-        switch (choice) {
-            case 1: createFile(); break;
-            case 2: writeFile(); break;
-            case 3: readFile(); break;
-            case 4: appendFile(); break;
-            case 5: printf("Exiting...\n"); exit(0);
-            default: printf("Invalid choice!\n");
-        }
-    }
-    return 0;
-}
+    FILE *file;
+    char data[100];
 
-void createFile() {
-    FILE *fp;
-    char filename[50];
-    
-    printf("Enter filename: ");
-    scanf("%s", filename);
-    
-    fp = fopen(filename, "w");
-    if (fp == NULL) {
+    // Create and write to file
+    file = fopen("example.txt", "w");
+    if (file == NULL) {
         printf("Error creating file!\n");
-        return;
+        return 1;
     }
-    
-    fclose(fp);
-    printf("File created successfully!\n");
-}
+    printf("Enter data to write to file: ");
+    fgets(data, 100, stdin);
+    fprintf(file, "%s", data);
+    fclose(file);
+    printf("Data written to file successfully!\n");
 
-void writeFile() {
-    FILE *fp;
-    char filename[50], content[100];
-    
-    printf("Enter filename: ");
-    scanf("%s", filename);
-    
-    fp = fopen(filename, "w");
-    if (fp == NULL) {
-        printf("Error opening file!\n");
-        return;
+    // Append data to file
+    file = fopen("example.txt", "a");
+    if (file == NULL) {
+        printf("Error opening file for append!\n");
+        return 1;
     }
-    
-    printf("Enter content: ");
-    scanf(" %[^\n]", content);
-    
-    fprintf(fp, "%s", content);
-    fclose(fp);
-    printf("Content written successfully!\n");
-}
+    printf("Enter data to append to file: ");
+    fgets(data, 100, stdin);
+    fprintf(file, "%s", data);
+    fclose(file);
+    printf("Data appended to file successfully!\n");
 
-void readFile() {
-    FILE *fp;
-    char filename[50], content[100];
-    
-    printf("Enter filename: ");
-    scanf("%s", filename);
-    
-    fp = fopen(filename, "r");
-    if (fp == NULL) {
-        printf("Error opening file!\n");
-        return;
+    // Read and display file content
+    file = fopen("example.txt", "r");
+    if (file == NULL) {
+        printf("Error opening file for reading!\n");
+        return 1;
     }
-    
-    printf("File contents:\n");
-    while (fgets(content, sizeof(content), fp)) {
-        printf("%s", content);
+    printf("\nContent of the file:\n");
+    while (fgets(data, 100, file) != NULL) {
+        printf("%s", data);
     }
-    fclose(fp);
-}
+    fclose(file);
 
-void appendFile() {
-    FILE *fp;
-    char filename[50], content[100];
-    
-    printf("Enter filename: ");
-    scanf("%s", filename);
-    
-    fp = fopen(filename, "a");
-    if (fp == NULL) {
-        printf("Error opening file!\n");
-        return;
-    }
-    
-    printf("Enter content to append: ");
-    scanf(" %[^\n]", content);
-    
-    fprintf(fp, "\n%s", content);
-    fclose(fp);
-    printf("Content appended successfully!\n");
+    return 0;
 }
