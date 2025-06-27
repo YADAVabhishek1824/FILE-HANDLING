@@ -87,4 +87,4 @@ File handling is a crucial concept that allows data to be stored and retrieved e
 
 #OUTPUT
 
-![Image](https://github.com/user-attachments/assets/e9e351d3-64b8-44f0-96d3-f8c604c40ead)
+![Image](https://github.com/user-attachments/assets/cae799b1-9475-42f1-9300-038fe80d3289)
